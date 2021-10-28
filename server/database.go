@@ -17,7 +17,7 @@ type User struct {
 
 // Insert new user account information into database
 func insertRecord(userName, passWord, firstName, lastName, language string) {
-	_, err := db.Exec("INSERT INTO MYSTOREDBFOODPANDA.Users VALUES (?,?,?,?,?)", userName, passWord, firstName, lastName, language)
+	_, err := db.Exec("INSERT INTO MYSTOREDBRABBITMQ.Users VALUES (?,?,?,?,?)", userName, passWord, firstName, lastName, language)
 	if err != nil {
 		Error.Println("Error inserting record into database")
 		fmt.Println(err)
@@ -28,7 +28,7 @@ func insertRecord(userName, passWord, firstName, lastName, language string) {
 
 // Delete user account information from database
 func deleteRecord(userName string) int {
-	results, err := db.Exec("DELETE FROM MYSTOREDBFOODPANDA.Users where Username=?", userName)
+	results, err := db.Exec("DELETE FROM MYSTOREDBRABBITMQ.Users where Username=?", userName)
 	if err != nil {
 		Error.Println("Error deleting record from database")
 		fmt.Println(err)
@@ -42,7 +42,7 @@ func deleteRecord(userName string) int {
 
 // Update user account password in database
 func changePasswordRecord(userName string, password []byte) {
-	results, err := db.Query("SELECT * FROM MYSTOREDBFOODPANDA.Users where Username=?", userName)
+	results, err := db.Query("SELECT * FROM MYSTOREDBRABBITMQ.Users where Username=?", userName)
 	if err != nil {
 		fmt.Println(err)
 	} else {
@@ -53,7 +53,7 @@ func changePasswordRecord(userName string, password []byte) {
 				fmt.Println(err)
 			} else {
 				fmt.Println("User new password updated in database successfully")
-				_, err := db.Exec("UPDATE MYSTOREDBFOODPANDA.Users set password = ?, firstname = ?, lastname = ?, language = ? where Username=?", password, &person.FirstName, &person.LastName, &person.Language, &person.UserName)
+				_, err := db.Exec("UPDATE MYSTOREDBRABBITMQ.Users set password = ?, firstname = ?, lastname = ?, language = ? where Username=?", password, &person.FirstName, &person.LastName, &person.Language, &person.UserName)
 				if err != nil {
 					panic(err)
 				}
@@ -64,7 +64,7 @@ func changePasswordRecord(userName string, password []byte) {
 
 // Update user account password in database
 func changeLanguageRecord(userName string, language string) {
-	results, err := db.Query("SELECT * FROM MYSTOREDBFOODPANDA.Users where Username=?", userName)
+	results, err := db.Query("SELECT * FROM MYSTOREDBRABBITMQ.Users where Username=?", userName)
 	if err != nil {
 		fmt.Println(err)
 	} else {
@@ -75,7 +75,7 @@ func changeLanguageRecord(userName string, language string) {
 				fmt.Println(err)
 			} else {
 				fmt.Println("User new language preference updated in database successfully")
-				_, err := db.Exec("UPDATE MYSTOREDBFOODPANDA.Users set language = ?, firstname = ?, lastname = ? where Username=?", language, &person.FirstName, &person.LastName, &person.UserName)
+				_, err := db.Exec("UPDATE MYSTOREDBRABBITMQ.Users set language = ?, firstname = ?, lastname = ? where Username=?", language, &person.FirstName, &person.LastName, &person.UserName)
 				if err != nil {
 					panic(err)
 				}
@@ -86,7 +86,7 @@ func changeLanguageRecord(userName string, language string) {
 
 // Check if user exists in database
 func checkUserExists(userName string) bool {
-	results, err := db.Query("SELECT * FROM MYSTOREDBFOODPANDA.Users where Username=?", userName)
+	results, err := db.Query("SELECT * FROM MYSTOREDBRABBITMQ.Users where Username=?", userName)
 	if err != nil {
 		fmt.Println(err)
 		return false
@@ -105,7 +105,7 @@ func checkUserExists(userName string) bool {
 
 // get the hashed password of the user in string type
 func getPasswordOfUser(userName string) string {
-	results, err := db.Query("SELECT * FROM MYSTOREDBFOODPANDA.Users where Username=?", userName)
+	results, err := db.Query("SELECT * FROM MYSTOREDBRABBITMQ.Users where Username=?", userName)
 	if err != nil {
 		fmt.Println(err)
 		return ""
@@ -125,7 +125,7 @@ func getPasswordOfUser(userName string) string {
 
 // get the first name of user in string type
 func getFirstNameOfUser(userName string) string {
-	results, err := db.Query("SELECT * FROM MYSTOREDBFOODPANDA.Users where Username=?", userName)
+	results, err := db.Query("SELECT * FROM MYSTOREDBRABBITMQ.Users where Username=?", userName)
 	if err != nil {
 		fmt.Println(err)
 		return ""
