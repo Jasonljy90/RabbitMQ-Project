@@ -21,3 +21,12 @@ Do either 2 or 3, not both
         key in the following command:
         docker-compose up
 ===================================================================================================================================================================
+4.) To install packages used by ReactJS
+    a.) open command prompt, cd into  C:\Users\user1\Desktop\GitHub\RabbitMQ-Project\ReactJS
+    b.) key in the following command:
+        npm install
+
+5.) To run ReactJS
+    a.) open command prompt, cd into  C:\Users\user1\Desktop\GitHub\RabbitMQ-Project\ReactJS
+    b.) key in the following command:
+        npm start
